@@ -31,14 +31,6 @@ public class BrasilApiService {
                 .setHeader(HttpHeaders.CONTENT_TYPE, "application-json")
                 .build();
 
-        /*
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(uri))
-                .setHeader("content-type", "application-json")
-                .build();
-        */
-
-
         HttpResponse response = null;
         Bank[] banks = new Bank[0];
 
