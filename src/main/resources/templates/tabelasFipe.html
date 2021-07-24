@@ -1,0 +1,62 @@
+<html th:replace="~{base :: layout (~{:: main})}">
+<body>
+<main>
+    <h1>Lista de Bancos</h1>
+
+    <ul>
+        <li>
+            <a href="/populateTabelasFipe">Importar da API</a>
+
+        </li>
+        <li>
+            <a href="/tabelasFipe/form">Adicionar novo</a>
+        </li>
+
+        <li>
+            <a href="/tabelasFipe/json">Listar json</a>
+        </li>
+
+        <li>
+            <a href="/">Voltar</a>
+        </li>
+    </ul>
+
+
+    <h3 stye="color:blue;" th.if="${mensagem}}"> [[ ${mensagem} ]]</h3>
+    <form action="#" method="post" th:action="@{/tabelasFipe/search}">
+        <div> Busca: <input type="number" name="busca" placeholder="Busca por Id">
+            <input type="submit" value="Buscar">
+            <a href="/tabelasFipe"><input type="button" value="Limpar"></a>
+
+        </div>
+    </form>
+
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>Codigo</th>
+            <th>Mês</th>
+
+        </tr>
+        <tr th:each="tabelaFipe : ${tabelasFipe}" >
+            <td th:text="${tabelaFipe.id}"></td>
+            <td th:text="${tabelaFipe.codigo}"></td>
+            <td th:text="${tabelaFipe.mes}"></td>
+
+            <td>
+                <ul>
+                    <li><a th:href="@{/tabelasFipe/form/edit/{id}(id=${tabelaFipe.id})}">Editar</a></li>
+                    <li><a th:href="@{/tabelasFipe/delete/{id}(id=${tabelaFipe.id})}">Apagar</a></li>
+
+                </ul>
+            </td>
+
+        </tr>
+    </table>
+</main>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,33 @@
+<html th:replace="~{base :: layout (~{:: main})}">
+<body>
+<main>
+  <h1>Formulário de Bancos</h1>
+
+  <form action="#" th:action="@{/banks/save}" th:object="${bank}" method="post">
+
+    <input type="text" th:field="*{id}" >
+
+    Codigo: <input type="text" th:field="*{codigo}">
+    <span th:if="${#fields.hasErrors('codigo')}"
+          th:errors="*{codigo}">
+        </span><br>
+
+    Mês: <input type="text" th:field="*{mes}">
+    <span th:if="${#fields.hasErrors('mes')}"
+          th:errors="*{mes}">
+        </span><br>
+
+
+    <input type="submit" value="Salvar">
+
+  </form>
+
+
+</main>
+</body>
+</html>
+
+
+
+
+
