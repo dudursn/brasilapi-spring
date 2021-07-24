@@ -3,6 +3,7 @@ package io.github.dudursn.brasilapi.controllers;
 import io.github.dudursn.brasilapi.daos.TabelaFipeDao;
 import io.github.dudursn.brasilapi.models.TabelaFipe;
 import io.github.dudursn.brasilapi.services.BrasilApiService;
+import io.github.dudursn.brasilapi.services.HttpClientService;
 import io.github.dudursn.brasilapi.utils.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,8 +24,7 @@ public class TabelaFipeController {
 
     private String mensagem = "";
 
-
-    @RequestMapping("/populateTabelaFipe")
+    @RequestMapping("/populateTabelasFipe")
     public String populateTabelaFipe() {
 
         TabelaFipe[] tabelasFipe = BrasilApiService.getTabelasFipe();

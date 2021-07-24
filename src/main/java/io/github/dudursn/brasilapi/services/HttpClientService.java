@@ -38,12 +38,8 @@ public class HttpClientService {
     }
 
 
-    public static int post(String uri, String data){
-        uri = "https://reqres.in/api/users";
-        data = "{" +
-                    "'name:'Joao," +
-                    "job:'Ttesteando'" +
-                "}";
+    public static String post(String uri, String data){
+
         HttpClient client = HttpClients.custom().build();
         StringEntity entity = null;
 
@@ -61,12 +57,11 @@ public class HttpClientService {
 
 
         HttpResponse response = null;
-        int content = 0;
+        String content = "";
         try {
+
             response = client.execute(request);
-            content = response.getStatusLine().getStatusCode();
-
-
+            content = Integer.toString(response.getStatusLine().getStatusCode());
         } catch (IOException e) {
             e.printStackTrace();
         }
