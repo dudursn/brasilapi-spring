@@ -22,10 +22,9 @@ public class HttpClientService {
                 .setHeader(HttpHeaders.CONTENT_TYPE, "application-json")
                 .build();
 
-        HttpResponse response = null;
         String content = "";
         try {
-            response = client.execute(request);
+            HttpResponse response = client.execute(request);
 
             content = Util.BufferToString(response.getEntity().getContent());
 
@@ -55,12 +54,62 @@ public class HttpClientService {
                 .setHeader(HttpHeaders.CONTENT_TYPE, "application-json")
                 .build();
 
-
-        HttpResponse response = null;
         String content = "";
         try {
 
-            response = client.execute(request);
+            HttpResponse response = client.execute(request);
+            content = Integer.toString(response.getStatusLine().getStatusCode());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return content;
+
+    }
+
+    public static String put(String uri, String data){
+
+        HttpClient client = HttpClients.custom().build();
+        StringEntity entity = null;
+
+        try {
+            entity = new StringEntity(data);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        HttpUriRequest request = RequestBuilder
+                .put(uri)
+                .setEntity(entity)
+                .setHeader(HttpHeaders.CONTENT_TYPE, "application-json")
+                .build();
+
+        String content = "";
+        try {
+
+            HttpResponse response = client.execute(request);
+            content = Integer.toString(response.getStatusLine().getStatusCode());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return content;
+
+    }
+
+    public static String delete(String uri){
+
+        HttpClient client = HttpClients.custom().build();
+
+        HttpUriRequest request = RequestBuilder
+                .delete(uri)
+                .setHeader(HttpHeaders.CONTENT_TYPE, "application-json")
+                .build();
+
+        String content = "";
+        try {
+
+            HttpResponse response = client.execute(request);
             content = Integer.toString(response.getStatusLine().getStatusCode());
         } catch (IOException e) {
             e.printStackTrace();
