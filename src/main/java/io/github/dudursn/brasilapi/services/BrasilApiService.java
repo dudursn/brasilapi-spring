@@ -3,6 +3,7 @@ package io.github.dudursn.brasilapi.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.dudursn.brasilapi.models.Bank;
+import io.github.dudursn.brasilapi.utils.Util;
 import org.apache.http.HttpResponse;
 
 import org.apache.http.client.methods.HttpUriRequest;
@@ -37,7 +38,7 @@ public class BrasilApiService {
         try {
             response = client.execute(request);
 
-            String content = BufferToString(response.getEntity().getContent());
+            String content = Util.BufferToString(response.getEntity().getContent());
 
             banks = new ObjectMapper().readValue(content, Bank [].class);
 
@@ -48,16 +49,5 @@ public class BrasilApiService {
         return banks;
     }
 
-    public static String BufferToString(InputStream content) throws IOException {
 
-        BufferedReader rd = new BufferedReader(new InputStreamReader(
-                content));
-        String line = "";
-        String str = "";
-        while ((line = rd.readLine()) != null) {
-            str += line;
-        }
-
-        return str;
-    }
 }

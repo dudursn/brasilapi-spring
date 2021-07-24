@@ -22,7 +22,15 @@
   </ul>
 
 
-  <h3 th.if="${mensagem}}"> [[ ${mensagem} ]]</h3>
+  <h3 stye="color:blue;" th.if="${mensagem}}"> [[ ${mensagem} ]]</h3>
+  <form action="#" method="post" th:action="@{/banks/search}">
+    <div> Busca: <input type="number" name="busca" placeholder="Busca por Id">
+    <input type="submit" value="Buscar">
+    <a href="/banks"><input type="button" value="Limpar"></a>
+
+    </div>
+  </form>
+
   <table class="table">
     <tr>
       <th>ID</th>
@@ -40,7 +48,7 @@
       <td th:text="${bank.fullName}"></td>
       <td>
         <ul>
-          <li><a th:href="@{/banks/form/{id}(id=${bank.id})}">Editar</a></li>
+          <li><a th:href="@{/banks/form/edit/{id}(id=${bank.id})}">Editar</a></li>
           <li><a th:href="@{/banks/delete/{id}(id=${bank.id})}">Apagar</a></li>
 
         </ul>
