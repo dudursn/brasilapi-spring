@@ -5,6 +5,8 @@
 
     <form action="#" th:action="@{/banks/save}" th:object="${bank}" method="post">
 
+        <input type="hidden" th:field="*{id}" >
+
         Name: <input type="text" th:field="*{name}">
         <span th:if="${#fields.hasErrors('name')}"
               th:errors="*{name}">
@@ -25,7 +27,7 @@
               th:errors="*{fullName}">
         </span><br>
 
-        <input type="submit" value="Enviar">
+        <input type="submit" value="Salvar">
 
     </form>
 

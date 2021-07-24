@@ -3,20 +3,10 @@ package io.github.dudursn.brasilapi.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.dudursn.brasilapi.models.Bank;
-import io.github.dudursn.brasilapi.utils.Util;
-import org.apache.http.HttpResponse;
+import io.github.dudursn.brasilapi.models.Cep;
+import io.github.dudursn.brasilapi.models.TabelaFipe;
 
-import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.client.methods.RequestBuilder;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.client.HttpClient;
-import org.apache.http.HttpHeaders;
-
-
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 
 public class BrasilApiService {
 
@@ -26,19 +16,10 @@ public class BrasilApiService {
 
         String uri = URL_BASE + "/banks/v1";
 
-        HttpClient client = HttpClients.custom().build();
-
-        HttpUriRequest request = RequestBuilder.get(uri)
-                .setHeader(HttpHeaders.CONTENT_TYPE, "application-json")
-                .build();
-
-        HttpResponse response = null;
         Bank[] banks = new Bank[0];
 
         try {
-            response = client.execute(request);
-
-            String content = Util.BufferToString(response.getEntity().getContent());
+            String content = HttpClientService.get(uri);
 
             banks = new ObjectMapper().readValue(content, Bank [].class);
 
@@ -48,6 +29,107 @@ public class BrasilApiService {
 
         return banks;
     }
+
+    public static Cep getCep(String cepStr){
+
+        String uri = URL_BASE + "/cep/v1/"+ cepStr;
+
+        Cep cep = new Cep();
+
+        try {
+
+            String content = HttpClientService.get(uri);
+
+            cep = new ObjectMapper().readValue(content, Cep.class);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return cep;
+    }
+
+
+   /* //public static Cnpj getCnpj(String cnpjStr){
+    public static String getCnpj(String cnpjStr){
+
+        String uri = URL_BASE + "/cnpj/v1/"+ cnpjStr;
+
+        //Cnpj cnpj = new Cnpj();
+
+
+        try {
+
+            String content = HttpClientService.get(uri);
+
+            //cnpj = new ObjectMapper().readValue(content, Cep.class);
+
+            return content;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return "cnpj";
+
+    }*/
+
+   /* //public static FeriadoNacional getFeriadoNacional(String feriadoNacionalStr){
+    public static String getFeriadoNacional(String feriadoNacionalStr){
+
+        String uri = URL_BASE + "/fipe/marcas/v1/"+ feriadoNacionalStr;
+
+        //FeriadoNacional feriadoNacional = new FeriadoNacional();
+
+        try {
+
+            String content = HttpClientService.get(uri);
+
+            //feriadoNacional = new ObjectMapper().readValue(content, Cep.class);
+            return content;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return "feriadoNacional";
+    }
+*/
+    public static TabelaFipe[] getTabelasFipe(){
+
+        String uri = URL_BASE + "/fipe/tabelas/v1";
+
+        TabelaFipe[] tabelasFipe = new TabelaFipe[0];
+
+        try {
+            String content = HttpClientService.get(uri);
+
+            tabelasFipe = new ObjectMapper().readValue(content, TabelaFipe [].class);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return tabelasFipe;
+    }
+
+   /* //public static TipoVeiculo getTipoVeiculo(String tipoVeiculoStr){
+    public static String getTipoVeiculo(String tipoVeiculoStr){
+
+        String uri = URL_BASE + "/fipe/marcas/v1/"+ tipoVeiculoStr;
+
+        //TipoVeiculo tipoVeiculo = new TipoVeiculo();
+
+        try {
+
+            String content = HttpClientService.get(uri);
+
+            //tipoVeiculo = new ObjectMapper().readValue(content, Cep.class);
+            return content;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return "tipoVeiculo";
+    }*/
 
 
 }

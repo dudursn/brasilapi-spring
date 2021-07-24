@@ -1,6 +1,5 @@
 package io.github.dudursn.brasilapi.controllers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.dudursn.brasilapi.daos.BankDao;
 import io.github.dudursn.brasilapi.models.Bank;
 import io.github.dudursn.brasilapi.services.BrasilApiService;
@@ -25,8 +24,8 @@ public class BankController {
     private String mensagem = "";
 
 
-    @RequestMapping("/popularBanks")
-    public String popularBanks() {
+    @RequestMapping("/populateBanks")
+    public String populateBanks() {
 
         Bank[] banks = BrasilApiService.getBanks();
         bankDao.saveAll(Arrays.asList(banks));
@@ -58,7 +57,7 @@ public class BankController {
     public String edit(@PathVariable("id") long id, Model model) {
         Optional<Bank> bank = bankDao.findById(id);
         model.addAttribute("bank", bank);
-        return "banksFormEdit";
+        return "banksForm";
     }
 
     @GetMapping("/banks/delete/{id}")

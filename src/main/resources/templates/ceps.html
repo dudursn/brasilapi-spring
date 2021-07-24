@@ -1,0 +1,75 @@
+<html th:replace="~{base :: layout (~{:: main})}">
+<body>
+<main>
+  <h1>Lista de Ceps</h1>
+
+  <ul>
+    <li>
+      <form action="#" method="post" th:action="@{/populateCep}">
+        <div> Adicionar da API: <input type="text" name="cep" placeholder="Busca por Cep(somente números)">
+          <input type="submit" value="Adicionar">
+
+        </div>
+      </form>
+
+
+    </li>
+    <li>
+      <a href="/ceps/form">Adicionar novo</a>
+    </li>
+
+    <li>
+      <a href="/ceps/json">Listar json</a>
+    </li>
+
+    <li>
+      <a href="/">Voltar</a>
+    </li>
+  </ul>
+
+
+  <h3 stye="color:blue;" th.if="${mensagem}}"> [[ ${mensagem} ]]</h3>
+  <form action="#" method="post" th:action="@{/ceps/search}">
+    <div> Busca: <input type="number" name="busca" placeholder="Busca por Id">
+    <input type="submit" value="Buscar">
+    <a href="/ceps"><input type="button" value="Limpar"></a>
+
+    </div>
+  </form>
+
+  <table class="table">
+
+    <tr>
+      <th>ID</th>
+      <th>Cep</th>
+      <th>State</th>
+      <th>City</th>
+      <th>Neighborhood</th>
+      <th>Street</th>
+      <th>Service</th>
+    </tr>
+    <tr th:each="cep : ${ceps}" >
+      <td th:text="${cep.id}"></td>
+      <td th:text="${cep.cep}"></td>
+      <td th:text="${cep.state}"></td>
+      <td th:text="${cep.city}"></td>
+      <td th:text="${cep.neighborhood}"></td>
+      <td th:text="${cep.street}"></td>
+      <td th:text="${cep.service}"></td>
+      <td>
+        <ul>
+          <li><a th:href="@{/ceps/form/edit/{id}(id=${cep.id})}">Editar</a></li>
+          <li><a th:href="@{/ceps/delete/{id}(id=${cep.id})}">Apagar</a></li>
+
+        </ul>
+      </td>
+
+    </tr>
+  </table>
+</main>
+</body>
+</html>
+
+
+
+
