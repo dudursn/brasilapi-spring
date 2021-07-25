@@ -110,7 +110,7 @@ public class CepController {
 
 
     /**
-     * Listar os dados do banco no formato json
+     * Listar os dados no formato json
      */
     @GetMapping("/ceps/json")
     @ResponseBody

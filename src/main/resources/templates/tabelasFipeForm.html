@@ -1,11 +1,11 @@
 <html th:replace="~{base :: layout (~{:: main})}">
 <body>
 <main>
-  <h1>Formulário de Bancos</h1>
+  <h1>Formulário de Tabela Fipe</h1>
 
-  <form action="#" th:action="@{/banks/save}" th:object="${bank}" method="post">
+  <form action="#" th:action="@{/tabelasFipe/save}" th:object="${tabelaFipe}" method="post">
 
-    <input type="text" th:field="*{id}" >
+    <input type="hidden" th:field="*{id}" >
 
     Codigo: <input type="text" th:field="*{codigo}">
     <span th:if="${#fields.hasErrors('codigo')}"

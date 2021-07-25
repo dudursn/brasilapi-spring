@@ -107,7 +107,7 @@ public class TabelaFipeController {
 
 
     /**
-     * Listar os dados do banco no formato json
+     * Listar os dados no formato json
      */
     @GetMapping("/tabelasFipe/json")
     @ResponseBody

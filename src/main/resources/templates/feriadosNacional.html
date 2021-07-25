@@ -1,0 +1,70 @@
+<html th:replace="~{base :: layout (~{:: main})}">
+<body>
+<main>
+    <h1>Lista de Feriados Nacionais</h1>
+
+    <ul>
+        <li>
+            <form action="#" method="post" th:action="@{/populateFeriadosNacional}">
+                <div> Adicionar da API: <input type="text" name="ano" placeholder="Busca por ano">
+                    <input type="submit" value="Adicionar">
+
+                </div>
+            </form>
+
+
+        </li>
+        <li>
+            <a href="/feriadosNacional/form">Adicionar novo</a>
+        </li>
+
+        <li>
+            <a href="/feriadosNacional/json">Listar json</a>
+        </li>
+
+        <li>
+            <a href="/">Voltar</a>
+        </li>
+    </ul>
+
+
+    <h3 stye="color:blue;" th.if="${mensagem}}"> [[ ${mensagem} ]]</h3>
+    <form action="#" method="post" th:action="@{/feriadosNacional/search}">
+        <div> Busca: <input type="number" name="busca" placeholder="Busca por Id">
+            <input type="submit" value="Buscar">
+            <a href="/feriadosNacional"><input type="button" value="Limpar"></a>
+
+        </div>
+    </form>
+
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Type</th>
+
+        </tr>
+        <tr th:each="feriadoNacional : ${feriadosNacional}" >
+            <td th:text="${feriadoNacional.id}"></td>
+            <td th:text="${feriadoNacional.name}"></td>
+            <td th:text="${feriadoNacional.date}"></td>
+            <td th:text="${feriadoNacional.type}"></td>
+
+            <td>
+                <ul>
+                    <li><a th:href="@{/feriadosNacional/form/edit/{id}(id=${feriadoNacional.id})}">Editar</a></li>
+                    <li><a th:href="@{/feriadosNacional/delete/{id}(id=${feriadoNacional.id})}">Apagar</a></li>
+
+                </ul>
+            </td>
+
+        </tr>
+    </table>
+</main>
+</body>
+</html>
+
+
+
+

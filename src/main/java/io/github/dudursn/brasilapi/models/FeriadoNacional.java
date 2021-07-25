@@ -1,10 +1,27 @@
 package io.github.dudursn.brasilapi.models;
 
+import io.github.dudursn.brasilapi.utils.Util;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.Date;
+
+@Entity
 public class FeriadoNacional {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private String date;
+
+    @NotNull
     private String name;
+
+    @NotNull
     private String type;
 
 

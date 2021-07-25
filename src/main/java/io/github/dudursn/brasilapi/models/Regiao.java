@@ -1,10 +1,24 @@
 package io.github.dudursn.brasilapi.models;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.Collection;
+
+@Entity
 public class Regiao {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @NotNull
     private String sigla;
+
+    @NotNull
     private String nome;
+
+    @OneToMany(mappedBy = "regiao", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Collection<Estado> estados;
 
 
     // Getter Methods

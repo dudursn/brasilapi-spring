@@ -1,0 +1,38 @@
+<html th:replace="~{base :: layout (~{:: main})}">
+<body>
+<main>
+    <h1>Formulário de Feriados Nacionais</h1>
+
+    <form action="#" th:action="@{/feriadosNacional/save}" th:object="${feriadoNacional}" method="post">
+
+        <input type="hidden" th:field="*{id}" >
+
+        Name: <input type="text" th:field="*{name}">
+        <span th:if="${#fields.hasErrors('name')}"
+              th:errors="*{name}">
+        </span><br>
+
+        Type: <input type="text" th:field="*{type}">
+        <span th:if="${#fields.hasErrors('type')}"
+              th:errors="*{type}">
+        </span><br>
+
+        Date: <input type="date" th:field="*{date}">
+        <span th:if="${#fields.hasErrors('date')}"
+              th:errors="*{date}">
+        </span><br>
+
+
+        <input type="submit" value="Salvar">
+
+    </form>
+
+
+</main>
+</body>
+</html>
+
+
+
+
+

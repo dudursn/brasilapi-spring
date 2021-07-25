@@ -27,7 +27,7 @@ public class HttpClientService {
             HttpResponse response = client.execute(request);
 
             content = Util.BufferToString(response.getEntity().getContent());
-
+            System.out.println(content);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -111,6 +111,7 @@ public class HttpClientService {
 
             HttpResponse response = client.execute(request);
             content = Integer.toString(response.getStatusLine().getStatusCode());
+
         } catch (IOException e) {
             e.printStackTrace();
         }

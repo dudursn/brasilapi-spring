@@ -4,6 +4,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class Util {
 
@@ -32,5 +38,27 @@ public class Util {
         }
 
         return str;
+    }
+
+    public static Date StringToDateServidor(String dt){
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+        Date date = new Date();
+        try {
+            date = formatter.parse(dt);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
+    }
+
+    public static String DateToStringWeb(Date date){
+
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+
+        String dataStr = df.format(date);
+
+        return dataStr;
     }
 }

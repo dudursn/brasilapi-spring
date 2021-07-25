@@ -1,11 +1,25 @@
 package io.github.dudursn.brasilapi.models;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
+@Entity
 public class Estado {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @NotNull
     private String sigla;
+
+    @NotNull
     private String nome;
-    Regiao Regiao;
+
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "regiao_id")
+    private Regiao regiao;
 
 
     // Getter Methods
@@ -23,7 +37,7 @@ public class Estado {
     }
 
     public Regiao getRegiao() {
-        return Regiao;
+        return regiao;
     }
 
     // Setter Methods
@@ -41,6 +55,6 @@ public class Estado {
     }
 
     public void setRegiao(Regiao regiao) {
-        this.Regiao = regiao;
+        this.regiao = regiao;
     }
 }

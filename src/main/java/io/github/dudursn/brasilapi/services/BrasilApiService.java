@@ -4,6 +4,7 @@ package io.github.dudursn.brasilapi.services;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.dudursn.brasilapi.models.Bank;
 import io.github.dudursn.brasilapi.models.Cep;
+import io.github.dudursn.brasilapi.models.FeriadoNacional;
 import io.github.dudursn.brasilapi.models.TabelaFipe;
 
 import java.io.IOException;
@@ -62,7 +63,7 @@ public class BrasilApiService {
 
             String content = HttpClientService.get(uri);
 
-            //cnpj = new ObjectMapper().readValue(content, Cep.class);
+            //cnpj = new ObjectMapper().readValue(content, Cnpj.class);
 
             return content;
         } catch (IOException e) {
@@ -73,26 +74,23 @@ public class BrasilApiService {
 
     }*/
 
-   /* //public static FeriadoNacional getFeriadoNacional(String feriadoNacionalStr){
-    public static String getFeriadoNacional(String feriadoNacionalStr){
+   public static FeriadoNacional[] getFeriadosNacional(String ano){
 
-        String uri = URL_BASE + "/fipe/marcas/v1/"+ feriadoNacionalStr;
+        String uri = URL_BASE + "/feriados/v1/"+ ano;
 
-        //FeriadoNacional feriadoNacional = new FeriadoNacional();
+        FeriadoNacional[] feriadosNacional = new FeriadoNacional[0];
 
         try {
 
             String content = HttpClientService.get(uri);
-
-            //feriadoNacional = new ObjectMapper().readValue(content, Cep.class);
-            return content;
+            feriadosNacional = new ObjectMapper().readValue(content, FeriadoNacional [].class);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return "feriadoNacional";
+        return feriadosNacional;
     }
-*/
+
     public static TabelaFipe[] getTabelasFipe(){
 
         String uri = URL_BASE + "/fipe/tabelas/v1";
@@ -122,7 +120,7 @@ public class BrasilApiService {
 
             String content = HttpClientService.get(uri);
 
-            //tipoVeiculo = new ObjectMapper().readValue(content, Cep.class);
+            //tipoVeiculo = new ObjectMapper().readValue(content, TipoVeiculo.class);
             return content;
         } catch (IOException e) {
             e.printStackTrace();
