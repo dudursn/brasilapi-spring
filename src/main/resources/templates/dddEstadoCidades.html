@@ -1,0 +1,66 @@
+<html th:replace="~{base :: layout (~{:: main})}">
+<body>
+<main>
+  <h1>Lista de Estados e Cidades Por DDD</h1>
+
+  <ul>
+    <li>
+      <form action="#" method="post" th:action="@{/populateDddEstadoCidade}">
+        <div> Adicionar da API: <input type="text" name="ddd" placeholder="Busca por DDD">
+          <input type="submit" value="Adicionar">
+
+        </div>
+      </form>
+
+    </li>
+    <li>
+      <a href="/dddEstadoCidades/form">Adicionar novo</a>
+    </li>
+
+    <li>
+      <a href="/dddEstadoCidades/json">Listar json</a>
+    </li>
+
+    <li>
+      <a href="/">Voltar</a>
+    </li>
+  </ul>
+
+
+  <h3 stye="color:blue;" th.if="${mensagem}}"> [[ ${mensagem} ]]</h3>
+  <form action="#" method="post" th:action="@{/dddEstadoCidades/search}">
+    <div> Busca: <input type="number" name="busca" placeholder="Busca por Id">
+      <input type="submit" value="Buscar">
+      <a href="/dddEstadoCidades"><input type="button" value="Limpar"></a>
+
+    </div>
+  </form>
+
+  <table class="table">
+    <tr>
+      <th>ID</th>
+      <th>State</th>
+      <th>Cidades</th>
+      <th>Ações</th>
+    </tr>
+    <tr th:each="dddEstadoCidade : ${dddEstadoCidades}" >
+      <td th:text="${dddEstadoCidade.id}"></td>
+      <td th:text="${dddEstadoCidade.state}"></td>
+      <td th:text="${dddEstadoCidade.cities}"></td>
+      <td>
+        <ul>
+          <li><a th:href="@{/dddEstadoCidades/form/edit/{id}(id=${dddEstadoCidade.id})}">Editar</a></li>
+          <li><a th:href="@{/dddEstadoCidades/delete/{id}(id=${dddEstadoCidade.id})}">Apagar</a></li>
+
+        </ul>
+      </td>
+
+    </tr>
+  </table>
+</main>
+</body>
+</html>
+
+
+
+

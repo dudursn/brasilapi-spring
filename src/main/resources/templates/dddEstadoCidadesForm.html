@@ -1,0 +1,34 @@
+<html th:replace="~{base :: layout (~{:: main})}">
+<body>
+<main>
+    <h1>Formulário de Estados e Cidades por DDD</h1>
+
+    <form action="#" th:action="@{/dddEstadoCidades/save}" th:object="${dddEstadoCidade}" method="post">
+
+        <input type="hidden" th:field="*{id}" >
+
+        State: <input type="text" th:field="*{state}">
+        <span th:if="${#fields.hasErrors('state')}"
+              th:errors="*{state}">
+        </span><br>
+
+        Cities: <textarea  rows = "5" cols = "80" th:field = "*{cities}"></textarea>
+        <span th:if="${#fields.hasErrors('cities')}"
+              th:errors="*{cities}">
+        </span><br>
+
+
+
+        <input type="submit" value="Salvar">
+
+    </form>
+
+
+</main>
+</body>
+</html>
+
+
+
+
+

@@ -3,6 +3,8 @@ package io.github.dudursn.brasilapi.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.dudursn.brasilapi.models.*;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.IOException;
 
@@ -66,6 +68,37 @@ public class BrasilApiService {
         return cnpj;
     }
 
+    public static DddEstadoCidade getDddEstadoCidade(String ddd){
+
+        String uri = URL_BASE + "/ddd/v1/"+ ddd;
+
+        DddEstadoCidade dddEstadoCidade = new DddEstadoCidade();
+
+
+        String content = HttpClientService.get(uri);
+
+        try{
+            JSONObject obj = new JSONObject(content);
+
+            if (obj.has("state")) {
+
+                dddEstadoCidade.setState(obj.getString("state"));
+                JSONArray cities = obj.getJSONArray("cities");
+                String citiesStr = "";
+                for (int i = 0; i < cities.length(); i++) {
+
+                   citiesStr += (String) cities.get(i) + ",";
+                }
+                citiesStr = citiesStr.substring(0, citiesStr.length() - 1);
+                dddEstadoCidade.setCities(citiesStr);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return dddEstadoCidade;
+
+    }
     public static FeriadoNacional[] getFeriadosNacional(String ano){
 
         String uri = URL_BASE + "/feriados/v1/"+ ano;
