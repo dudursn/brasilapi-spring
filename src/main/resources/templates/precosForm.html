@@ -1,0 +1,72 @@
+<html th:replace="~{base :: layout (~{:: main})}">
+<body>
+<main>
+    <h1>Formulário de Preços</h1>
+
+    <form action="#" th:action="@{/precos/save}" th:object="${preco}" method="post">
+
+        <input type="hidden" th:field="*{id}" >
+
+        Valor: <input type="text" th:field="*{valor}">
+        <span th:if="${#fields.hasErrors('valor')}"
+              th:errors="*{valor}">
+        </span><br>
+
+        Marca: <input type="text" th:field="*{marca}">
+        <span th:if="${#fields.hasErrors('marca')}"
+              th:errors="*{marca}">
+        </span><br>
+
+        Modelo: <input type="text" th:field="*{modelo}">
+        <span th:if="${#fields.hasErrors('modelo')}"
+              th:errors="*{modelo}">
+        </span><br>
+
+        Ano do Modelo: <input type="number" th:field="*{anoModelo}">
+        <span th:if="${#fields.hasErrors('anoModelo')}"
+              th:errors="*{anoModelo}">
+        </span><br>
+
+        Combustível: <input type="text" th:field="*{combustivel}">
+        <span th:if="${#fields.hasErrors('combustivel')}"
+              th:errors="*{combustivel}">
+        </span><br>
+
+        Código Fipe: <input type="text" th:field="*{codigoFipe}">
+        <span th:if="${#fields.hasErrors('codigoFipe')}"
+              th:errors="*{codigoFipe}">
+        </span><br>
+
+        Mês de referência: <input type="text" th:field="*{mesReferencia}">
+        <span th:if="${#fields.hasErrors('mesReferencia')}"
+              th:errors="*{mesReferencia}">
+        </span><br>
+
+        Tipo de Veículo: <input type="number" th:field="*{tipoVeiculo}">
+        <span th:if="${#fields.hasErrors('tipoVeiculo')}"
+              th:errors="*{tipoVeiculo}">
+        </span><br>
+
+        Sigla do Combustivel: <input type="text" th:field="*{siglaCombustivel}" maxlength="1">
+        <span th:if="${#fields.hasErrors('siglaCombustivel')}"
+              th:errors="*{siglaCombustivel}" >
+        </span><br>
+
+        Data de Consulta: <input type="text" th:field="*{dataConsulta}">
+        <span th:if="${#fields.hasErrors('dataConsulta')}"
+              th:errors="*{dataConsulta}">
+        </span><br>
+
+        <input type="submit" value="Salvar">
+
+    </form>
+
+
+</main>
+</body>
+</html>
+
+
+
+
+

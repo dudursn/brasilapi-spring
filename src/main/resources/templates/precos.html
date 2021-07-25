@@ -1,0 +1,81 @@
+<html th:replace="~{base :: layout (~{:: main})}">
+<body>
+<main>
+    <h1>Lista de Preços de Veículos</h1>
+
+    <ul>
+        <li>
+            <form action="#" method="post" th:action="@{/populatePrecos}">
+                <div> Adicionar da API: <input type="text" name="codigoFipe" placeholder="Buscar por Codigo fipe">
+                    <input type="submit" value="Adicionar">
+                </div>
+            </form>
+        </li>
+        <li>
+            <a href="/precos/form">Adicionar novo</a>
+        </li>
+
+        <li>
+            <a href="/precos/json">Listar json</a>
+        </li>
+
+        <li>
+            <a href="/">Voltar</a>
+        </li>
+    </ul>
+
+
+    <h3 stye="color:blue;" th.if="${mensagem}}"> [[ ${mensagem} ]]</h3>
+    <form action="#" method="post" th:action="@{/precos/search}">
+        <div> Busca: <input type="number" name="busca" placeholder="Busca por Id">
+            <input type="submit" value="Buscar">
+            <a href="/precos"><input type="button" value="Limpar"></a>
+
+        </div>
+    </form>
+
+    <table class="table">
+
+        <tr>
+            <th>ID</th>
+            <th>Valor</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Ano</th>
+            <th>Combustível</th>
+            <th>Cod. Fipe</th>
+            <th>Mês de referência</th>
+            <th>Tipo de veículo</th>
+            <th>Sigla de Combustível</th>
+            <th>Data de Consulta</th>
+            <th>Ações</th>
+        </tr>
+        <tr th:each="preco : ${precos}" >
+            <td th:text="${preco.id}"></td>
+            <td th:text="${preco.valor}"></td>
+            <td th:text="${preco.marca}"></td>
+            <td th:text="${preco.modelo}"></td>
+            <td th:text="${preco.anoModelo}"></td>
+            <td th:text="${preco.combustivel}"></td>
+            <td th:text="${preco.codigoFipe}"></td>
+            <td th:text="${preco.mesReferencia}"></td>
+            <td th:text="${preco.tipoVeiculo}"></td>
+            <td th:text="${preco.siglaCombustivel}"></td>
+            <td th:text="${preco.dataConsulta}"></td>
+            <td>
+                <ul>
+                    <li><a th:href="@{/precos/form/edit/{id}(id=${preco.id})}">Editar</a></li>
+                    <li><a th:href="@{/precos/delete/{id}(id=${preco.id})}">Apagar</a></li>
+
+                </ul>
+            </td>
+
+        </tr>
+    </table>
+</main>
+</body>
+</html>
+
+
+
+

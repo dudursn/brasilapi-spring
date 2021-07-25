@@ -53,22 +53,18 @@ public class BrasilApiService {
 
         String uri = URL_BASE + "/cnpj/v1/"+ cnpjStr;
 
-        //Cnpj cnpj = new Cnpj();
+        Cnpj cnpj = new Cnpj();
 
 
         try {
 
             String content = HttpClientService.get(uri);
-
-            //cnpj = new ObjectMapper().readValue(content, Cnpj.class);
-
-            return content;
+            cnpj = new ObjectMapper().readValue(content, Cnpj.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return "cnpj";
-
+        return cnpj;
     }*/
 
     public static FeriadoNacional[] getFeriadosNacional(String ano){
@@ -123,26 +119,25 @@ public class BrasilApiService {
         return marcas;
     }
 
+    public static Preco[] getPrecos(String codigoFipe){
 
-    /* //public static TipoVeiculo getTipoVeiculo(String tipoVeiculoStr){
-    public static String getTipoVeiculo(String tipoVeiculoStr){
+        String uri = URL_BASE + "/fipe/preco/v1/" + codigoFipe;
 
-        String uri = URL_BASE + "/fipe/marcas/v1/"+ tipoVeiculoStr;
-
-        //TipoVeiculo tipoVeiculo = new TipoVeiculo();
+        Preco[] precos = new Preco[0];
 
         try {
 
             String content = HttpClientService.get(uri);
 
-            //tipoVeiculo = new ObjectMapper().readValue(content, TipoVeiculo.class);
-            return content;
+            precos = new ObjectMapper().readValue(content, Preco [].class);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return "tipoVeiculo";
-    }*/
+        return precos;
+    }
+
 
 
 }

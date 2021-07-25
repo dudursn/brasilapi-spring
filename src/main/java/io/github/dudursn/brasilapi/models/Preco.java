@@ -1,9 +1,6 @@
 package io.github.dudursn.brasilapi.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -14,7 +11,7 @@ public class Preco {
     private long id;
 
     @NotNull
-    private float valor;
+    private String valor;
 
     @NotNull
     private String marca;
@@ -38,7 +35,7 @@ public class Preco {
     private int tipoVeiculo;
 
     @NotNull
-    private String siglaCombustivel;
+    private char siglaCombustivel;
 
     @NotNull
     private String dataConsulta;
@@ -50,7 +47,7 @@ public class Preco {
         return id;
     }
 
-    public float getValor() {
+    public String getValor() {
         return valor;
     }
 
@@ -82,7 +79,7 @@ public class Preco {
         return tipoVeiculo;
     }
 
-    public String getSiglaCombustivel() {
+    public char getSiglaCombustivel() {
         return siglaCombustivel;
     }
 
@@ -96,7 +93,7 @@ public class Preco {
         this.id = id;
     }
 
-    public void setValor(float valor) {
+    public void setValor(String valor) {
         this.valor = valor;
     }
 
@@ -128,7 +125,7 @@ public class Preco {
         this.tipoVeiculo = tipoVeiculo;
     }
 
-    public void setSiglaCombustivel(String siglaCombustivel) {
+    public void setSiglaCombustivel(char siglaCombustivel) {
         this.siglaCombustivel = siglaCombustivel;
     }
 
