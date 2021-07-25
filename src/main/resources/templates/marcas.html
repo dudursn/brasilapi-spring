@@ -1,0 +1,75 @@
+<html th:replace="~{base :: layout (~{:: main})}">
+<body>
+<main>
+  <h1>Lista de Marcas de Veículos</h1>
+
+  <ul>
+    <li>
+      <form action="#" method="post" th:action="@{/populateMarcas}">
+        <div> Adicionar da API por tipo de veículo:
+
+          <select class="form-control form-control-sm" name="tipoVeiculo">
+            <option disabled value="">--</option>
+            <option value="carros">Carros</option>
+            <option value="motos">Motos</option>
+            <option value="caminhoes">Caminhões</option>
+
+          </select>
+          <input type="submit" value="Adicionar">
+
+        </div>
+      </form>
+    </li>
+
+    <li>
+      <a href="/marcas/form">Adicionar novo</a>
+    </li>
+
+    <li>
+      <a href="/marcas/json">Listar json</a>
+    </li>
+
+    <li>
+      <a href="/">Voltar</a>
+    </li>
+  </ul>
+
+
+  <h3 stye="color:blue;" th.if="${mensagem}}"> [[ ${mensagem} ]]</h3>
+  <form action="#" method="post" th:action="@{/marcas/search}">
+    <div> Busca: <input type="number" name="busca" placeholder="Busca por Id">
+      <input type="submit" value="Buscar">
+      <a href="/marcas"><input type="button" value="Limpar"></a>
+
+    </div>
+  </form>
+
+  <table class="table">
+    <tr>
+      <th>ID</th>
+      <th>Nome</th>
+      <th>Valor</th>
+      <th>Ação</th>
+    </tr>
+    <tr th:each="marca : ${marcas}" >
+      <td th:text="${marca.id}"></td>
+      <td th:text="${marca.nome}"></td>
+      <td th:text="${marca.valor}"></td>
+
+      <td>
+        <ul>
+          <li><a th:href="@{/marcas/form/edit/{id}(id=${marca.id})}">Editar</a></li>
+          <li><a th:href="@{/marcas/delete/{id}(id=${marca.id})}">Apagar</a></li>
+
+        </ul>
+      </td>
+
+    </tr>
+  </table>
+</main>
+</body>
+</html>
+
+
+
+

@@ -2,10 +2,7 @@ package io.github.dudursn.brasilapi.services;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.github.dudursn.brasilapi.models.Bank;
-import io.github.dudursn.brasilapi.models.Cep;
-import io.github.dudursn.brasilapi.models.FeriadoNacional;
-import io.github.dudursn.brasilapi.models.TabelaFipe;
+import io.github.dudursn.brasilapi.models.*;
 
 import java.io.IOException;
 
@@ -51,7 +48,7 @@ public class BrasilApiService {
     }
 
 
-   /* //public static Cnpj getCnpj(String cnpjStr){
+    /* //public static Cnpj getCnpj(String cnpjStr){
     public static String getCnpj(String cnpjStr){
 
         String uri = URL_BASE + "/cnpj/v1/"+ cnpjStr;
@@ -74,7 +71,7 @@ public class BrasilApiService {
 
     }*/
 
-   public static FeriadoNacional[] getFeriadosNacional(String ano){
+    public static FeriadoNacional[] getFeriadosNacional(String ano){
 
         String uri = URL_BASE + "/feriados/v1/"+ ano;
 
@@ -109,7 +106,25 @@ public class BrasilApiService {
         return tabelasFipe;
     }
 
-   /* //public static TipoVeiculo getTipoVeiculo(String tipoVeiculoStr){
+    public static Marca[] getMarcas(String tipoVeiculo){
+
+        String uri = URL_BASE + "/fipe/marcas/v1/"+ tipoVeiculo;
+
+        Marca[] marcas = new Marca[0];
+
+        try {
+
+            String content = HttpClientService.get(uri);
+            marcas = new ObjectMapper().readValue(content, Marca [].class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return marcas;
+    }
+
+
+    /* //public static TipoVeiculo getTipoVeiculo(String tipoVeiculoStr){
     public static String getTipoVeiculo(String tipoVeiculoStr){
 
         String uri = URL_BASE + "/fipe/marcas/v1/"+ tipoVeiculoStr;

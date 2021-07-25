@@ -1,0 +1,65 @@
+<html th:replace="~{base :: layout (~{:: main})}">
+<body>
+<main>
+  <h1>Lista de Estados</h1>
+
+  <ul>
+    <li>
+      <a href="/populateBanks">Importar da API</a>
+
+    </li>
+    <li>
+      <a href="/estados/form">Adicionar novo</a>
+    </li>
+
+    <li>
+      <a href="/estados/json">Listar json</a>
+    </li>
+
+    <li>
+      <a href="/">Voltar</a>
+    </li>
+  </ul>
+
+
+  <h3 stye="color:blue;" th.if="${mensagem}}"> [[ ${mensagem} ]]</h3>
+  <form action="#" method="post" th:action="@{/estados/search}">
+    <div> Busca: <input type="number" name="busca" placeholder="Busca por Id">
+      <input type="submit" value="Buscar">
+      <a href="/estados"><input type="button" value="Limpar"></a>
+
+    </div>
+  </form>
+
+  <table class="table">
+    <tr>
+      <th>ID</th>
+      <th>Sigla</th>
+      <th>Nome</th>
+      <th>Sigla da Região</th>
+      <th>Nome da Região</th>
+      <th>Ação</th>
+    </tr>
+    <tr th:each="estado : ${estados}" >
+      <td th:text="${estado.id}"></td>
+      <td th:text="${estado.sigla}"></td>
+      <td th:text="${estado.nome}"></td>
+      <td th:text="${estado.regiao.sigla}"></td>
+      <td th:text="${estado.regiao.nome}"></td>
+      <td>
+        <ul>
+          <li><a th:href="@{/estados/form/edit/{id}(id=${estado.id})}">Editar</a></li>
+          <li><a th:href="@{/estados/delete/{id}(id=${estado.id})}">Apagar</a></li>
+
+        </ul>
+      </td>
+
+    </tr>
+  </table>
+</main>
+</body>
+</html>
+
+
+
+

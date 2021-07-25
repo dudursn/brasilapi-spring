@@ -1,0 +1,34 @@
+<html th:replace="~{base :: layout (~{:: main})}">
+<body>
+<main>
+    <h1>Formulário de Marcas</h1>
+
+    <form action="#" th:action="@{/marcas/save}" th:object="${marca}" method="post">
+
+        <input type="hidden" th:field="*{id}" >
+
+        Nome: <input type="text" th:field="*{nome}">
+        <span th:if="${#fields.hasErrors('nome')}"
+              th:errors="*{nome}">
+        </span><br>
+
+        Valor: <input type="number" th:field="*{valor}">
+        <span th:if="${#fields.hasErrors('valor')}"
+              th:errors="*{valor}">
+        </span><br>
+
+
+
+        <input type="submit" value="Salvar">
+
+    </form>
+
+
+</main>
+</body>
+</html>
+
+
+
+
+

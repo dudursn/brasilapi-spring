@@ -1,0 +1,42 @@
+<html th:replace="~{base :: layout (~{:: main})}">
+<body>
+<main>
+    <h1>Formulário de Estados</h1>
+
+    <form action="#" th:action="@{/estados/save}" th:object="${estado}" method="post">
+
+        <input type="hidden" th:field="*{id}" >
+
+        Nome: <input type="text" th:field="*{nome}">
+        <span th:if="${#fields.hasErrors('nome')}"
+              th:errors="*{nome}">
+        </span><br>
+
+        Sigla: <input type="text" th:field="*{ispb}">
+        <span th:if="${#fields.hasErrors('ispb')}"
+              th:errors="*{ispb}">
+        </span><br>
+
+        Nome da Região: <input type="text" th:field="*{regiao.nome}">
+        <span th:if="${#fields.hasErrors('regiao.nome')}"
+              th:errors="*{regiao.nome}">
+        </span><br>
+
+        Sigla da região: <input type="text" th:field="*{regiao.sigla}">
+        <span th:if="${#fields.hasErrors('regiao.sigla')}"
+              th:errors="*{regiao.sigla}">
+        </span><br>
+
+        <input type="submit" value="Salvar">
+
+    </form>
+
+
+</main>
+</body>
+</html>
+
+
+
+
+
