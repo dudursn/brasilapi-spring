@@ -1,7 +1,7 @@
 package io.github.dudursn.brasilapi.controllers;
 
-import io.github.dudursn.brasilapi.daos.BankDao;
-import io.github.dudursn.brasilapi.models.Bank;
+import io.github.dudursn.brasilapi.daos.EstadoDao;
+import io.github.dudursn.brasilapi.models.Estado;
 import io.github.dudursn.brasilapi.services.BrasilApiService;
 import io.github.dudursn.brasilapi.utils.Util;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,92 +16,92 @@ import java.util.*;
 
 
 @Controller
-public class BankController {
+public class EstadoController {
 
     @Autowired
-    BankDao bankDao;
+    EstadoDao estadoDao;
 
     private String mensagem = "";
 
 
-    @RequestMapping("/populateBanks")
-    public String populateBanks() {
+    @RequestMapping("/populateEstados")
+    public String populateEstados() {
 
-        Bank[] banks = BrasilApiService.getBanks();
-        bankDao.saveAll(Arrays.asList(banks));
+        Estado[] estados = BrasilApiService.getEstados();
+        estadoDao.saveAll(Arrays.asList(estados));
         this.mensagem = "Registros consumidos da API";
-        return "redirect:/banks";
+        return "redirect:/estados";
     }
 
-    @RequestMapping("/banks")
-    public String banks(Model model) {
+    @RequestMapping("/estados")
+    public String estados(Model model) {
 
         if (this.mensagem != "") {
             model.addAttribute("mensagem", this.mensagem);
             this.mensagem = "";
         }
 
-        model.addAttribute("banks", bankDao.findAll());
-        return "banks";
+        model.addAttribute("estados", estadoDao.findAll());
+        return "estados";
     }
 
 
-    @RequestMapping("/banks/form")
+    @RequestMapping("/estados/form")
     public String create(Model model) {
 
-        model.addAttribute("bank", new Bank());
-        return "banksForm";
+        model.addAttribute("estado", new Estado());
+        return "estadosForm";
     }
 
-    @RequestMapping("/banks/form/edit/{id}")
+    @RequestMapping("/estados/form/edit/{id}")
     public String edit(@PathVariable("id") long id, Model model) {
-        Optional<Bank> bank = bankDao.findById(id);
-        model.addAttribute("bank", bank);
-        return "banksForm";
+        Optional<Estado> estado = estadoDao.findById(id);
+        model.addAttribute("estado", estado);
+        return "estadosForm";
     }
 
-    @GetMapping("/banks/delete/{id}")
+    @GetMapping("/estados/delete/{id}")
     public String delete(@PathVariable("id") long id, Model model) {
 
 
-        bankDao.findById(id)
+        estadoDao.findById(id)
                 .map(record -> {
-                    bankDao.deleteById(id);
+                    estadoDao.deleteById(id);
 
                     return 1;
                 });
 
         this.mensagem = "Registro apagado com sucesso";
-        return "redirect:/banks";
+        return "redirect:/estados";
     }
 
-    @PostMapping("/banks/search")
+    @PostMapping("/estados/search")
     public String search(@RequestParam("busca") String busca, Model model) {
 
         long id = Util.StringToLong(busca);
-        List<Bank> banks = new ArrayList<Bank>();
-        Optional<Bank> dado = bankDao.findById(id);
+        List<Estado> estados = new ArrayList<>();
+        Optional<Estado> dado = estadoDao.findById(id);
         if(dado.isPresent()){
 
-            banks.add(dado.get());
+            estados.add(dado.get());
             model.addAttribute("mensagem", "Resultado para o id: " + id);
         }else{
 
             model.addAttribute("mensagem", "Não encontrado!");
         }
-        model.addAttribute("banks", banks);
-        return "banks";
+        model.addAttribute("estados", estados);
+        return "estados";
     }
 
-    @PostMapping("/banks/save")
-    public String save(@Validated Bank bank, BindingResult result) {
+    @PostMapping("/estados/save")
+    public String save(@Validated Estado estado, BindingResult result) {
 
         if (result.hasErrors()) {
-            return "banksForm";
+            return "estadosForm";
         }
         this.mensagem = "Registro salvo com sucesso";
-        bankDao.save(bank);
-        return "redirect:/banks";
+        estadoDao.save(estado);
+        return "redirect:/estados";
     }
 
 
@@ -109,13 +109,13 @@ public class BankController {
     /**
      * Listar os dados no formato json
      */
-    @GetMapping("/banks/json")
+    @GetMapping("/estados/json")
     @ResponseBody
-    public ResponseEntity<Collection<Bank>> findAllJson() {
+    public ResponseEntity<Collection<Estado>> findAllJson() {
 
-        List<Bank> banks = (List<Bank>) bankDao.findAll();
+        List<Estado> estados = (List<Estado>) estadoDao.findAll();
 
-        return ResponseEntity.ok(banks);
+        return ResponseEntity.ok(estados);
     }
 
 }

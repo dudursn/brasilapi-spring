@@ -12,10 +12,12 @@
               th:errors="*{nome}">
         </span><br>
 
-        Sigla: <input type="text" th:field="*{ispb}">
-        <span th:if="${#fields.hasErrors('ispb')}"
-              th:errors="*{ispb}">
+        Sigla: <input type="text" th:field="*{sigla}">
+        <span th:if="${#fields.hasErrors('sigla')}"
+              th:errors="*{sigla}">
         </span><br>
+
+        <input type="hidden" th:field="*{regiao.id}" >
 
         Nome da Região: <input type="text" th:field="*{regiao.nome}">
         <span th:if="${#fields.hasErrors('regiao.nome')}"

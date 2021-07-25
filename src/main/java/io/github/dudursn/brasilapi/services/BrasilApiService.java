@@ -48,8 +48,7 @@ public class BrasilApiService {
     }
 
 
-    /* //public static Cnpj getCnpj(String cnpjStr){
-    public static String getCnpj(String cnpjStr){
+    public static Cnpj getCnpj(String cnpjStr){
 
         String uri = URL_BASE + "/cnpj/v1/"+ cnpjStr;
 
@@ -65,7 +64,7 @@ public class BrasilApiService {
         }
 
         return cnpj;
-    }*/
+    }
 
     public static FeriadoNacional[] getFeriadosNacional(String ano){
 
@@ -138,6 +137,22 @@ public class BrasilApiService {
         return precos;
     }
 
+    public static Estado[] getEstados(){
 
+        String uri = URL_BASE + "/ibge/uf/v1";
+
+        Estado[] estados = new Estado[0];
+
+        try {
+            String content = HttpClientService.get(uri);
+
+            estados = new ObjectMapper().readValue(content, Estado [].class);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return estados;
+    }
 
 }

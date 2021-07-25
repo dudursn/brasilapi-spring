@@ -5,7 +5,7 @@
 
   <ul>
     <li>
-      <a href="/populateBanks">Importar da API</a>
+      <a href="/populateEstados">Importar da API</a>
 
     </li>
     <li>
@@ -38,7 +38,7 @@
       <th>Nome</th>
       <th>Sigla da Região</th>
       <th>Nome da Região</th>
-      <<th>Ações</th>
+      <th>Ações</th>
     </tr>
     <tr th:each="estado : ${estados}" >
       <td th:text="${estado.id}"></td>
