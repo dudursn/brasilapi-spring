@@ -1,7 +1,7 @@
 package io.github.dudursn.brasilapi.controllers;
 
-import io.github.dudursn.brasilapi.daos.CepDao;
-import io.github.dudursn.brasilapi.models.Cep;
+import io.github.dudursn.brasilapi.daos.CnpjDao;
+import io.github.dudursn.brasilapi.models.Cnpj;
 import io.github.dudursn.brasilapi.services.BrasilApiService;
 import io.github.dudursn.brasilapi.utils.Util;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,93 +21,93 @@ import java.util.Optional;
 public class CnpjController {
 
     @Autowired
-    CepDao cepDao;
+    CnpjDao cnpjDao;
 
     private String mensagem = "";
 
-    @PostMapping("/populateCep")
-    public String populateCeps(@RequestParam("cep") String cepStr) {
+    @PostMapping("/populateCnpj")
+    public String populateCnpj(@RequestParam("cnpj") String cnpjStr) {
 
-        Cep cep = BrasilApiService.getCep(cepStr);
+        Cnpj cnpj = BrasilApiService.getCnpj(cnpjStr);
         this.mensagem = "Registro não encontrado";
 
-        if(cep!=null && cep.getCep()!=(null)){
-            cepDao.save(cep);
+        if(cnpj!=null && cnpj.getCnpj()!=(null)){
+            cnpjDao.save(cnpj);
             this.mensagem = "Registro consumido da API";
         }
 
-        return "redirect:/ceps";
+        return "redirect:/cnpjs";
     }
 
-    @RequestMapping("/ceps")
-    public String ceps(Model model) {
+    @RequestMapping("/cnpjs")
+    public String cnpjs(Model model) {
 
         if (this.mensagem != "") {
             model.addAttribute("mensagem", this.mensagem);
             this.mensagem = "";
         }
 
-        model.addAttribute("ceps", cepDao.findAll());
-        return "ceps";
+        model.addAttribute("cnpjs", cnpjDao.findAll());
+        return "cnpjs";
     }
 
 
-    @RequestMapping("/ceps/form")
+    @RequestMapping("/cnpjs/form")
     public String create(Model model) {
 
-        model.addAttribute("cep", new Cep());
-        return "cepsForm";
+        model.addAttribute("cnpj", new Cnpj());
+        return "cnpjsForm";
     }
 
-    @RequestMapping("/ceps/form/edit/{id}")
+    @RequestMapping("/cnpjs/form/edit/{id}")
     public String edit(@PathVariable("id") long id, Model model) {
-        Optional<Cep> cep = cepDao.findById(id);
-        model.addAttribute("cep", cep);
-        return "cepsForm";
+        Optional<Cnpj> cnpj = cnpjDao.findById(id);
+        model.addAttribute("cnpj", cnpj);
+        return "cnpjsForm";
     }
 
-    @GetMapping("/ceps/delete/{id}")
+    @GetMapping("/cnpjs/delete/{id}")
     public String delete(@PathVariable("id") long id, Model model) {
 
 
-        cepDao.findById(id)
+        cnpjDao.findById(id)
                 .map(record -> {
-                    cepDao.deleteById(id);
+                    cnpjDao.deleteById(id);
 
                     return 1;
                 });
 
         this.mensagem = "Registro apagado com sucesso";
-        return "redirect:/ceps";
+        return "redirect:/cnpjs";
     }
 
-    @PostMapping("/ceps/search")
+    @PostMapping("/cnpjs/search")
     public String search(@RequestParam("busca") String busca, Model model) {
 
         long id = Util.StringToLong(busca);
-        List<Cep> ceps = new ArrayList<Cep>();
-        Optional<Cep> dado = cepDao.findById(id);
+        List<Cnpj> cnpjs = new ArrayList<Cnpj>();
+        Optional<Cnpj> dado = cnpjDao.findById(id);
         if(dado.isPresent()){
 
-            ceps.add(dado.get());
+            cnpjs.add(dado.get());
             model.addAttribute("mensagem", "Resultado para o id: " + id);
         }else{
 
             model.addAttribute("mensagem", "Não encontrado!");
         }
-        model.addAttribute("ceps", ceps);
-        return "/ceps";
+        model.addAttribute("cnpjs", cnpjs);
+        return "/cnpjs";
     }
 
-    @PostMapping("/ceps/save")
-    public String save(@Validated Cep cep, BindingResult result) {
+    @PostMapping("/cnpjs/save")
+    public String save(@Validated Cnpj cnpj, BindingResult result) {
 
         if (result.hasErrors()) {
-            return "cepsForm";
+            return "cnpjsForm";
         }
         this.mensagem = "Registro salvo com sucesso";
-        cepDao.save(cep);
-        return "redirect:/ceps";
+        cnpjDao.save(cnpj);
+        return "redirect:/cnpjs";
     }
 
 
@@ -115,13 +115,13 @@ public class CnpjController {
     /**
      * Listar os dados no formato json
      */
-    @GetMapping("/ceps/json")
+    @GetMapping("/cnpjs/json")
     @ResponseBody
-    public ResponseEntity<Collection<Cep>> findAllJson() {
+    public ResponseEntity<Collection<Cnpj>> findAllJson() {
 
-        List<Cep> ceps = (List<Cep>) cepDao.findAll();
+        List<Cnpj> cnpjs = (List<Cnpj>) cnpjDao.findAll();
 
-        return ResponseEntity.ok(ceps);
+        return ResponseEntity.ok(cnpjs);
     }
 
 

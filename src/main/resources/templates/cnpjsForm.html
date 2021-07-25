@@ -1,0 +1,52 @@
+<html th:replace="~{base :: layout (~{:: main})}">
+<body>
+<main>
+    <h1>Formulário de Cnpjs</h1>
+
+    <form action="#" th:action="@{/cnpjs/save}" th:object="${cnpj}" method="post">
+
+        <input type="hidden" th:field="*{id}" >
+
+        Cnpj: <input type="text" th:field="*{cnpj}">
+        <span th:if="${#fields.hasErrors('cnpj')}"
+              th:errors="*{cnpj}">
+        </span><br>
+
+        State: <input type="text" th:field="*{state}">
+        <span th:if="${#fields.hasErrors('state')}"
+              th:errors="*{state}">
+        </span><br>
+
+        City: <input type="text" th:field="*{city}">
+        <span th:if="${#fields.hasErrors('city')}"
+              th:errors="*{city}">
+        </span><br>
+
+        Neighborhood: <input type="text" th:field="*{neighborhood}">
+        <span th:if="${#fields.hasErrors('neighborhood')}"
+              th:errors="*{neighborhood}">
+        </span><br>
+
+        Street: <input type="text" th:field="*{street}">
+        <span th:if="${#fields.hasErrors('street')}"
+              th:errors="*{street}">
+        </span><br>
+
+        Service: <input type="text" th:field="*{service}">
+        <span th:if="${#fields.hasErrors('service')}"
+              th:errors="*{service}">
+        </span><br>
+
+        <input type="submit" value="Salvar">
+
+    </form>
+
+
+</main>
+</body>
+</html>
+
+
+
+
+

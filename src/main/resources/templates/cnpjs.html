@@ -1,0 +1,90 @@
+<html th:replace="~{base :: layout (~{:: main})}">
+<body>
+<main>
+    <h1>Lista de Cnpjs</h1>
+
+    <ul>
+        <li>
+            <form action="#" method="post" th:action="@{/populateCnpj}">
+                <div> Adicionar da API: <input type="text" name="cnpj" placeholder="Busca por Cnpj(somente números)">
+                    <input type="submit" value="Adicionar">
+
+                </div>
+            </form>
+        </li>
+        <li>
+            <a href="/cnpjs/form">Adicionar novo</a>
+        </li>
+
+        <li>
+            <a href="/cnpjs/json">Listar json</a>
+        </li>
+
+        <li>
+            <a href="/">Voltar</a>
+        </li>
+    </ul>
+
+
+    <h3 stye="color:blue;" th.if="${mensagem}}"> [[ ${mensagem} ]]</h3>
+    <form action="#" method="post" th:action="@{/cnpjs/search}">
+        <div> Busca: <input type="number" name="busca" placeholder="Busca por Id">
+            <input type="submit" value="Buscar">
+            <a href="/cnpjs"><input type="button" value="Limpar"></a>
+
+        </div>
+    </form>
+
+    <table class="table">
+
+        <tr>
+            <th>ID</th>
+            <th>Cnpj</th>
+            <th>Descrição da Matriz Filial</th>
+            <th>Razão Social</th>
+            <th>Nome Fantasia</th>
+            <th>Descricao da Situacao Cadastral</th>
+            <th>Cnae Fiscal</th>
+            <th>Descrição do Cnae Fiscal</th>
+            <th>Municipio</th>
+            <th>Uf</th>
+            <th>Telefone</th>
+            <th>Opção pelo simples</th>
+            <th>Opção pelo MEI</th>
+            <th>Cnaes Secundários</th>
+            <th>Quadro Social de Administradores</th>
+            <th>Ações</th>
+        </tr>
+        <tr th:each="cnpj : ${cnpjs}" >
+            <td th:text="${cnpj.id}"></td>
+            <td th:text="${cnpj.cnpj}"></td>
+            <td th:text="${cnpj.descricaoMatrizFilial}"></td>
+            <td th:text="${cnpj.razaoSocial}"></td>
+            <td th:text="${cnpj.nomeFantasia}"></td>
+            <td th:text="${cnpj.descricaoSituacaoCadastral}"></td>
+            <td th:text="${cnpj.cnaeFiscal}"></td>
+            <td th:text="${cnpj.cnaeFiscalDescricao}"></td>
+            <td th:text="${cnpj.municipio}"></td>
+            <td th:text="${cnpj.uf}"></td>
+            <td th:text="${cnpj.dddTelefone1}"></td>
+            <td th:text="${cnpj.opcaoPeloSimples}"></td>
+            <td th:text="${cnpj.opcaoPeloMei}"></td>
+            <td>Cnae Sec</td>
+            <td>QSA</td>
+            <td>
+                <ul>
+                    <li><a th:href="@{/cnpjs/form/edit/{id}(id=${cnpj.id})}">Editar</a></li>
+                    <li><a th:href="@{/cnpjs/delete/{id}(id=${cnpj.id})}">Apagar</a></li>
+
+                </ul>
+            </td>
+
+        </tr>
+    </table>
+</main>
+</body>
+</html>
+
+
+
+
