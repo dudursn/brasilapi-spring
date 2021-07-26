@@ -38,7 +38,7 @@ public class Qsa {
     private String codigo_qualificacao_representante_legal;
 
     @ManyToOne
-    @JoinColumn(name = "cnpj_id")
+    @JoinColumn(name = "cnpj_id", nullable = true)
     private Cnpj cnpj;
 
     // Getter Methods

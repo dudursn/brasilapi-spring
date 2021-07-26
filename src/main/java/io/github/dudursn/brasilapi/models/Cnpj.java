@@ -87,10 +87,12 @@ public class Cnpj {
 
 
     @NotNull
-    private String ddd_telefone_1;
+    @Column(name="ddd_telefone_i")
+    private String ddd_telefone_i;
 
-    @Column(nullable = true)
-    private String ddd_telefone_2;
+
+    @Column(name="ddd_telefone_ii",nullable = true)
+    private String ddd_telefone_ii;
 
     @Column(nullable = true)
     private String ddd_fax;
@@ -233,12 +235,12 @@ public class Cnpj {
         return municipio;
     }
 
-    public String getDdd_telefone_1() {
-        return ddd_telefone_1;
+    public String getDdd_telefone_i() {
+        return ddd_telefone_i;
     }
 
-    public String getDdd_telefone_2() {
-        return ddd_telefone_2;
+    public String getDdd_telefone_ii() {
+        return ddd_telefone_ii;
     }
 
     public String getDdd_fax() {
@@ -392,12 +394,12 @@ public class Cnpj {
         this.municipio = municipio;
     }
 
-    public void setDdd_telefone_1(String ddd_telefone_1) {
-        this.ddd_telefone_1 = ddd_telefone_1;
+    public void setDdd_telefone_i(String ddd_telefone_i) {
+        this.ddd_telefone_i = ddd_telefone_i;
     }
 
-    public void setDdd_telefone_2(String ddd_telefone_2) {
-        this.ddd_telefone_2 = ddd_telefone_2;
+    public void setDdd_telefone_ii(String ddd_telefone_ii) {
+        this.ddd_telefone_ii = ddd_telefone_ii;
     }
 
     public void setDdd_fax(String ddd_fax) {

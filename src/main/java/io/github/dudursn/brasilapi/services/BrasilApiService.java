@@ -1,12 +1,14 @@
 package io.github.dudursn.brasilapi.services;
 
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.dudursn.brasilapi.models.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 public class BrasilApiService {
 
@@ -56,12 +58,35 @@ public class BrasilApiService {
 
         Cnpj cnpj = new Cnpj();
 
-
         try {
 
             String content = HttpClientService.get(uri);
-            cnpj = new ObjectMapper().readValue(content, Cnpj.class);
-        } catch (IOException e) {
+            cnpj = new ObjectMapper()
+                    .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+                    .readValue(content, Cnpj.class);
+
+            JSONObject obj = new JSONObject(content);
+
+            if (obj.has("ddd_telefone_1")) {
+                cnpj.setDdd_telefone_i(obj.getString("ddd_telefone_1"));
+            }
+            if (obj.has("ddd_telefone_2")) {
+                cnpj.setDdd_telefone_ii(obj.getString("ddd_telefone_2"));
+            }
+
+            if(obj.has("cnaes_secundarios")) {
+                CnaeSecundario[] cnaesSecundarios= new ObjectMapper()
+                        .readValue(obj.getJSONObject("cnaes_secundarios").toString(), CnaeSecundario [].class);
+
+                cnpj.setCnaeSecundarios(Arrays.asList(cnaesSecundarios));
+            }
+
+            if(obj.has("qsa")) {
+                Qsa[] qsas = new ObjectMapper()
+                        .readValue(obj.getJSONObject("qsa").toString(), Qsa [].class);
+                cnpj.setQsas(Arrays.asList(qsas));
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -99,6 +124,7 @@ public class BrasilApiService {
         return dddEstadoCidade;
 
     }
+
     public static FeriadoNacional[] getFeriadosNacional(String ano){
 
         String uri = URL_BASE + "/feriados/v1/"+ ano;

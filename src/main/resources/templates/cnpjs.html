@@ -12,9 +12,6 @@
                 </div>
             </form>
         </li>
-        <li>
-            <a href="/cnpjs/form">Adicionar novo</a>
-        </li>
 
         <li>
             <a href="/cnpjs/json">Listar json</a>
@@ -51,29 +48,27 @@
             <th>Telefone</th>
             <th>Opção pelo simples</th>
             <th>Opção pelo MEI</th>
-            <th>Cnaes Secundários</th>
-            <th>Quadro Social de Administradores</th>
+
             <th>Ações</th>
         </tr>
         <tr th:each="cnpj : ${cnpjs}" >
             <td th:text="${cnpj.id}"></td>
             <td th:text="${cnpj.cnpj}"></td>
-            <td th:text="${cnpj.descricaoMatrizFilial}"></td>
-            <td th:text="${cnpj.razaoSocial}"></td>
-            <td th:text="${cnpj.nomeFantasia}"></td>
-            <td th:text="${cnpj.descricaoSituacaoCadastral}"></td>
-            <td th:text="${cnpj.cnaeFiscal}"></td>
-            <td th:text="${cnpj.cnaeFiscalDescricao}"></td>
+            <td th:text="${cnpj.descricao_matriz_filial}"></td>
+            <td th:text="${cnpj.razao_social}"></td>
+            <td th:text="${cnpj.nome_fantasia}"></td>
+            <td th:text="${cnpj.descricao_situacao_cadastral}"></td>
+            <td th:text="${cnpj.cnae_fiscal}"></td>
+            <td th:text="${cnpj.cnae_fiscal_descricao}"></td>
             <td th:text="${cnpj.municipio}"></td>
             <td th:text="${cnpj.uf}"></td>
-            <td th:text="${cnpj.dddTelefone1}"></td>
-            <td th:text="${cnpj.opcaoPeloSimples}"></td>
-            <td th:text="${cnpj.opcaoPeloMei}"></td>
-            <td>Cnae Sec</td>
-            <td>QSA</td>
+            <td th:text="${cnpj.ddd_telefone_i}"></td>
+            <td th:text="${cnpj.opcao_pelo_simples}"></td>
+            <td th:text="${cnpj.opcao_pelo_mei}"></td>
+
             <td>
                 <ul>
-                    <li><a th:href="@{/cnpjs/form/edit/{id}(id=${cnpj.id})}">Editar</a></li>
+
                     <li><a th:href="@{/cnpjs/delete/{id}(id=${cnpj.id})}">Apagar</a></li>
 
                 </ul>
