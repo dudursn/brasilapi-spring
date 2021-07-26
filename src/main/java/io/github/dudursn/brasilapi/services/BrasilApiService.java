@@ -7,7 +7,6 @@ import io.github.dudursn.brasilapi.models.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.Arrays;
 
 public class BrasilApiService {
@@ -25,7 +24,7 @@ public class BrasilApiService {
 
             banks = new ObjectMapper().readValue(content, Bank [].class);
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -44,7 +43,7 @@ public class BrasilApiService {
 
             cep = new ObjectMapper().readValue(content, Cep.class);
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -135,7 +134,7 @@ public class BrasilApiService {
 
             String content = HttpClientService.get(uri);
             feriadosNacional = new ObjectMapper().readValue(content, FeriadoNacional [].class);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -153,7 +152,7 @@ public class BrasilApiService {
 
             tabelasFipe = new ObjectMapper().readValue(content, TabelaFipe [].class);
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -170,7 +169,7 @@ public class BrasilApiService {
 
             String content = HttpClientService.get(uri);
             marcas = new ObjectMapper().readValue(content, Marca [].class);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -189,7 +188,7 @@ public class BrasilApiService {
 
             precos = new ObjectMapper().readValue(content, Preco [].class);
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -207,7 +206,7 @@ public class BrasilApiService {
 
             estados = new ObjectMapper().readValue(content, Estado [].class);
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

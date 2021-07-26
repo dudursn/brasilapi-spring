@@ -19,7 +19,8 @@ public class HttpClientService {
         HttpClient client = HttpClients.custom().build();
 
         HttpUriRequest request = RequestBuilder.get(uri)
-                .setHeader(HttpHeaders.CONTENT_TYPE, "application-json")
+                .setHeader(HttpHeaders.CONTENT_TYPE, "text/html")
+                .setHeader("Accept", "application-json")
                 .build();
 
         String content = "";
