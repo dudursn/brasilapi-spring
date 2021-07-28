@@ -1,6 +1,28 @@
 # brasilapi
 
-Esse projeto foi feito utilizando a linguagem Java, o framework Spring Framework e Banco de Dados MariaDB 10.4.17. Consiste em consumir os dados do brasil api
-(https://brasilapi.com.br/docs) e armazenar no banco de dados.
+## Sobre
 
-This project has been made in programmin language Java and Spring Framework. The objective was consume data from brasilapi (https://brasilapi.com.br/docs) througth HttpClient and save in the database.
+Esse projeto teve como objetivo consumir os dados do brasil api (https://brasilapi.com.br/docs)  utilizando HttpClient e armazenar no banco de dados. 
+Foram utilizados a linguagem de programação Java, o Spring Framework e o MariaDB.
+
+## About
+
+The objective of this project was consume data from brasilapi (https://brasilapi.com.br/docs) througth HttpClient and save in the database.
+The Java programming language, the Spring Framework and the MariaDB database were used.
+
+## Tecnologias (Technologies)
+
+- Java
+- Spring Framework
+- MariaDB 
+- Thymeleaf
+
+## Dependências (Dependencies)
+
+- JDK 11
+- MariaDB 10.4.17
+- Maven
+
+## Referências (References)
+- BrasilAPI (https://brasilapi.com.br/docs)
+- Spring(https://spring.io/)
