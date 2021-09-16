@@ -14,13 +14,12 @@ The Java programming language, the Spring Boot and the MariaDB database were use
 
 - Java
 - Spring Boot
-- MariaDB 
+- MariaDB 10.4.17 
 - Thymeleaf
 
 ## Dependências (Dependencies)
 
 - JDK 11
-- MariaDB 10.4.17
 - Maven
 
 ## Referências (References)
