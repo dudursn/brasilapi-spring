@@ -13,7 +13,7 @@ The Java programming language, the Spring Boot and the MariaDB database were use
 ## Tecnologias (Technologies)
 
 - Java
-- Spring Boot
+- Spring Boot 5.3.10
 - MariaDB 10.4.17 
 - Thymeleaf
 
